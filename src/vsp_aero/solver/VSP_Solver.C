@@ -832,7 +832,8 @@ void VSP_SOLVER::Solve(int Case)
        printf("\n");
        
     }
-    
+     fprintf(stderr,"  Iter      Mach       AoA      Beta       CL         CDo       CDi      CDtot      CS        L/D        E        CFx       CFy       CFz       CMx       CMy       CMz       T/QS \n");
+   
     if ( ForceType_ == FORCE_AVERAGE ) OutputStatusFile(1);
      
     OutputZeroLiftDragToStatusFile();
@@ -2153,7 +2154,6 @@ void VSP_SOLVER::CalculatePressureForces(void)
           Cx += Fx;
           Cy += Fy;
           Cz += Fz;
-          
           // Moments
 
           Cmx += Fz * ( SurfaceVortexEdge(j).Yc() - XYZcg_[1] ) - Fy * ( SurfaceVortexEdge(j).Zc() - XYZcg_[2] );   // Roll
@@ -4376,6 +4376,25 @@ void VSP_SOLVER::OutputStatusFile(int Type)
        
     }
     
+    fprintf(stderr,"%9d %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf\n",
+            i,
+            Mach_,
+            AngleOfAttack_/TORAD,
+            AngleOfBeta_/TORAD,
+            CL(Type),
+            CDo(),
+            CD(Type),
+            CDo() + CD(Type),
+            CS(Type),            
+            CL(Type)/(CDo() + CD(Type)),
+            E,
+            CFx(Type),
+            CFy(Type),
+            CFz(Type),
+            CMx(Type),
+            CMy(Type),
+            CMz(Type),
+            ToQS);
     fprintf(StatusFile_,"%9d %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf %9.5lf\n",
             i,
             Mach_,
