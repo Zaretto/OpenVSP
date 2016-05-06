@@ -239,8 +239,10 @@ void GL_VIEWER::LoadInitialData(char *name)
     sprintf(file_name,"%s",name);
 
     // Determine if an adb file exists
-    
-    sprintf(file_name_w_ext,"%s.adb",file_name);
+    if (strstr(file_name,".adb") )    
+        sprintf(file_name_w_ext,"%s",file_name);
+    else
+        sprintf(file_name_w_ext,"%s.adb",file_name);
 
     if ( (adb_file = fopen(file_name_w_ext,"rb")) != NULL ) {
      
@@ -408,7 +410,10 @@ void GL_VIEWER::LoadMeshData(void)
 
     // Open the aerothermal data base file
 
-    sprintf(file_name_w_ext,"%s.adb",file_name);
+    if (strstr(file_name,".adb") )    
+        sprintf(file_name_w_ext,"%s",file_name);
+    else
+        sprintf(file_name_w_ext,"%s.adb",file_name);
 
     if ( (adb_file = fopen(file_name_w_ext,"rb")) == NULL ) {
 
@@ -1196,7 +1201,10 @@ void GL_VIEWER::LoadExistingSolutionData(void)
 
     // Open the aerothermal data base file
 
-    sprintf(file_name_w_ext,"%s.adb",file_name);
+    if (strstr(file_name,".adb") )    
+        sprintf(file_name_w_ext,"%s",file_name);
+    else
+        sprintf(file_name_w_ext,"%s.adb",file_name);
 
     if ( (adb_file = fopen(file_name_w_ext,"rb")) == NULL ) {
 
